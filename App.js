@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Button, Image, ScrollView, Platform, TextInput } from 'react-native';
-import CompBienvenid from './src/compBienvenido';
+import CompBienvenid from './src/main/components/compBienvenido';
+import Header from './src/main/containers/header.js';
 
 // export default function App() {
   
