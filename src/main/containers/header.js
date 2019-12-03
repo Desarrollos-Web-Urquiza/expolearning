@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import HeaderLayout from '../components/headerLayout';
 
+
+
 class Header extends Component {
 
 
@@ -9,9 +11,10 @@ class Header extends Component {
 
 
 
+			
 		return(
 
-			<HeaderLayout />
+			<HeaderLayout log={this.props.log} />
 
 		)
 

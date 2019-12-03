@@ -1,17 +1,21 @@
 import React from 'react';
-import { StyleSheet, View, Button, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, ScrollView } from 'react-native';
 
 
 function HeaderLayout() {
     
+
+     
     return (
         
 
         <View style={styles.header}>
 
-                <Image source={require('./assets/ciapfa.jpg')} style={styles.logo} /> 
                 
-                <Button title={log} onPress= {  () => {this.setState({login: 0})}  }  />
+                
+                <Image source={require('../../../assets/ciapfa.jpg')} style={styles.logo} /> 
+                
+                <Button title="LOGIN"  />
               
               
         </View>
@@ -38,6 +42,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
     
   },
+  logo: {
+    
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginTop: 500
+
+
+  },
+
 
   
 });

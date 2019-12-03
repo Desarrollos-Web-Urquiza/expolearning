@@ -8,7 +8,7 @@ import { StyleSheet, Text, View, Button, Image, ScrollView, Platform, TextInput 
 
 
 
-export default function CompBienvenid(props) {
+export default function CompBienvenido(props) {
   
 
 
