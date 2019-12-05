@@ -8,15 +8,14 @@ function FooterLayout() {
      
     return (
         
-
         <View style={styles.footer}>
 
           <Text  style={styles.textColor}>CIAPFA</Text>
           <Text style={styles.textColor}>Hola CIAPFA </Text>
           <Image source={require('../../../assets/menu-login.png')} style={styles.logo2} /> 
+         
             
         </View>
-
 
 
 

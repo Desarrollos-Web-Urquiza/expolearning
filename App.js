@@ -1,14 +1,23 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Button, Image, ScrollView, Platform, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, ScrollView, Platform, TextInput, FlatList } from 'react-native';
 import CompBienvenido from './src/main/components/compBienvenido.js';
 import Header from './src/main/containers/header.js';
 import Footer from './src/main/containers/footer.js';
 import Body from './src/main/containers/body.js';
+import FlatListComponent from './src/main/containers/flatlist.js';
 
 
 
 class App extends Component {
-  
+  	constructor() {
+	    super();
+	    
+
+	    this.state = { misPeliculas : [ {name : 'El Kiosko', key: '0' }, {name : 'El Fútbol o yo', key: '1' }, {name : 'El secreto de sus ojos', key: '2' }  ] }
+
+	    
+					 
+ 	 }
 	
 
 
@@ -30,10 +39,12 @@ class App extends Component {
 	    	<Header />
 	    	
 	    	<Body />
+	    	
+	    	<FlatListComponent />
 
-	  		<Footer />
+			<Footer /> 
 
-	    
+
 
 	    </View>
 	  
@@ -57,7 +68,7 @@ const styles = StyleSheet.create({
 
     flexDirection: 'column'
   },
-
+	
  
   
 
