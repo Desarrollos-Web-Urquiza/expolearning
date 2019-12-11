@@ -1,78 +1,78 @@
-import React, {Component} from 'react';
-import { StyleSheet, Text, View, Button, Image, ScrollView, Platform, TextInput, FlatList } from 'react-native';
-import CompBienvenido from './src/main/components/compBienvenido.js';
-import Header from './src/main/containers/header.js';
-import Footer from './src/main/containers/footer.js';
-import Body from './src/main/containers/body.js';
-import FlatListComponent from './src/main/containers/flatlist.js';
+import React from "react";
+import { StyleSheet, Text, View } from 'react-native';
+import * as firebase from 'firebase';
+import 'firebase/firestore';
+import { config, settings } from "./FirebaseConfig";
+import Setup from "./src/boot/setup";
+
+
+firebase.initializeApp(config);
+
+const firestore = firebase.firestore();
+firestore.settings(settings);
+
+console.disableYellowBox = ['Remote Debugger'];
+
+
+export default class App extends React.Component {
+
+
+  componentDidMount(){
+
+    // this._getRealTimeData();
+    this._getNormalData();
+
+
+  }
+
+  render() {
+    return (
+      
+        <Setup />
+     
+    );
+  }
+
+    // _getRealTimeData = () => {
+
+    //     const realTimeDatabaseRef = firestore.collection("users").doc("hola mundo");
+
+    //     realTimeDatabaseRef.onSnapshot( doc => {
+
+    //         console.log('--------------- Realtime Database ---------------');
+
+    //         if (doc.exists) console.log(doc.data());
+    //         else console.log('El documento no existe');
+
+    //         console.log('-----------------------------------------------');
+
+    //     })
 
 
 
-class App extends Component {
-  	constructor() {
-	    super();
-	    
+    // };
 
-	    this.state = { misPeliculas : [ {name : 'El Kiosko', key: '0' }, {name : 'El Fútbol o yo', key: '1' }, {name : 'El secreto de sus ojos', key: '2' }  ] }
+    _getNormalData = () => {
 
-	    
-					 
- 	 }
-	
+        const normalDatabseRef = firestore.collection("users").doc("hola mundo");
 
+        normalDatabseRef.get().then( doc => {
 
-	render(){
-	
-	  
+            console.log('--------------- Normal Database ---------------');
+
+            if (doc.exists) console.log(doc.data());
+             else console.log('El documento no existe');
+
+            console.log('-----------------------------------------------');
 
 
- 
-	 
-
-	  return (
-
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
 
 
-	    <View style={styles.container}>
-	      
-	    	
-	    	<Header />
-	    	
-	    	<Body />
-	    	
-	    	<FlatListComponent />
+    }
 
-			<Footer /> 
+}//class
 
 
-
-	    </View>
-	  
-
-	  );
-	}
-}
-
-
-
-
-
-
-const styles = StyleSheet.create({
- 
-
-
-  container: {
-    flex: 1,
-    backgroundColor: 'green',
-
-    flexDirection: 'column'
-  },
-	
- 
-  
-
-});
-
-
-export default App
