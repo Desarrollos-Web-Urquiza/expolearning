@@ -2,17 +2,31 @@ import React, { Component } from 'react';
 import {StyleSheet, TextInput} from 'react-native'
 import { Container, Header, Content, Card, CardItem, Text, Body, Button, Item ,Label, Input, Icon,  } from 'native-base';
 export default class Login extends Component {
-  
+    
+
+    constructor() {
+      super();
+      
+
+      this.state = {user : '', pass: '', login: 0 }
+
+      
+           
+   }
+
+
+
 
     register = () => {
 
       this.props.navigation.navigate('Register')
+
      
     } 
 
 
-
   render() {
+    // let {login} = this.state
     return (
        <Container>
    
@@ -40,13 +54,14 @@ export default class Login extends Component {
               <Button success onPress={this.register}>
                 <Text>RESGISTRO</Text>
               </Button>
-              <Button primary style={styles.boton}>
+              <Button primary style={styles.boton}  onPress= {  () => {this.setState({login: !login})}  }  >
+
                 <Text>ENTRAR</Text>
               </Button>
             </CardItem>
           </Card>
         </Content>
-
+       
       </Container>
     );
   }
