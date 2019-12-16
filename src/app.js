@@ -5,6 +5,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Login from './modules/Login/containers/login';
 import Register from './modules/Register/containers/register';
+import Home from './modules/Home/containers/home';
 
 
 const LoginNavigator= createStackNavigator({
@@ -13,6 +14,15 @@ const LoginNavigator= createStackNavigator({
   Login : {
 
     screen: Login,
+
+    
+
+
+  },
+
+  Home : {
+
+    screen: Home,
 
     
 

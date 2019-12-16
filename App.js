@@ -1,29 +1,29 @@
 import React from "react";
 import { StyleSheet, Text, View } from 'react-native';
-import * as firebase from 'firebase';
-import 'firebase/firestore';
-import { config, settings } from "./FirebaseConfig";
+// import * as firebase from 'firebase';
+// import 'firebase/firestore';
+// import { config, settings } from "./firebase/FirebaseConfig";
 import Setup from "./src/boot/setup";
 
-
+/*
 firebase.initializeApp(config);
 
 const firestore = firebase.firestore();
 firestore.settings(settings);
 
-console.disableYellowBox = ['Remote Debugger'];
+console.disableYellowBox = ['Remote Debugger'];*/
 
 
 export default class App extends React.Component {
 
 
-  componentDidMount(){
+  // componentDidMount(){
 
-    // this._getRealTimeData();
-    this._getNormalData();
+  //   // this._getRealTimeData();
+  //   this._getNormalData();
 
 
-  }
+  // }
 
   render() {
     return (
@@ -34,7 +34,7 @@ export default class App extends React.Component {
   }
 
     // _getRealTimeData = () => {
-
+    	
     //     const realTimeDatabaseRef = firestore.collection("users").doc("hola mundo");
 
     //     realTimeDatabaseRef.onSnapshot( doc => {
@@ -52,26 +52,26 @@ export default class App extends React.Component {
 
     // };
 
-    _getNormalData = () => {
+    // _getNormalData = () => {
 
-        const normalDatabseRef = firestore.collection("users").doc("hola mundo");
+    //     const normalDatabseRef = firestore.collection("users").doc("hola mundo");
 
-        normalDatabseRef.get().then( doc => {
+    //     normalDatabseRef.get().then( doc => {
 
-            console.log('--------------- Normal Database ---------------');
+    //         console.log('--------------- Normal Database ---------------');
 
-            if (doc.exists) console.log(doc.data());
-             else console.log('El documento no existe');
+    //         if (doc.exists) console.log(doc.data());
+    //          else console.log('El documento no existe');
 
-            console.log('-----------------------------------------------');
-
-
-        }).catch(function(error) {
-            console.log("Error getting document:", error);
-        });
+    //         console.log('-----------------------------------------------');
 
 
-    }
+    //     }).catch(function(error) {
+    //         console.log("Error getting document:", error);
+    //     });
+
+
+    // }
 
 }//class
 
