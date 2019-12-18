@@ -30,7 +30,7 @@ const LoginNavigator= createStackNavigator({
   },
 
 Register : {
-
+ 
     screen: Register,
 
     

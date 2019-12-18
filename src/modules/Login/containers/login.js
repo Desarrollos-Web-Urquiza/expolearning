@@ -37,6 +37,8 @@ export default class Login extends Component {
      
     } 
 
+    
+
 
   render() {
     let {login} = this.state
@@ -51,9 +53,9 @@ export default class Login extends Component {
     
        
       
-      if(login == 1) {
+      function procesar (props, esto)  {
 
-        console.log("Entró al if")
+        console.log("Entró a la function")
         
         const _getNormalData = () => {
           
@@ -71,7 +73,7 @@ export default class Login extends Component {
                   console.log(doc.data().credentials); 
 
 
-                  return resolve(doc.data().credentials)
+                  return resolve(doc.data().credentials) //Resolvemos la promesa con los valores que vienen de la base de datos.
                 
                 }
                 else{
@@ -90,7 +92,7 @@ export default class Login extends Component {
 
         }
 
-        _getNormalData()
+        _getNormalData(props, esto)
         .then(param => {
 
 
@@ -98,32 +100,37 @@ export default class Login extends Component {
             if(param.user == user && param.password == pass ){
 
               console.log("Puede loguearse") 
+              props.navigation.navigate('Home')//props = this.props(Login.props); Recibe como argumento el "this.props" de Login de afuera de la función.
+              /* ↑ Lo mandamos al home */
 
-              this.setState({login: !login})
 
-              this.props.navigation.navigate('Home')
+
+              
 
 
             }else{
 
 
+
               console.log("No puede loguearse") 
               if(user == '' || pass == ''  ){
 
-                this.setState({err: 'Los datos están incompletos.'})
-                this.setState({login: !login})
+                esto.setState({err: 'Los datos están incompletos.'})// esto = this(Login); Recibe como argumento el "this" que sería Login fuera de la función.
+
 
               }else{
                 if(err == 'No existe ningún usuario que coincida con esa contraseña. Escriba los datos nuevamente.'){
 
 
+
                   console.log("Entró al if de 'Datos erróneos' ") 
-                  this.setState({err: 'Datos erróneos. Escriba los datos nuevamente.'})
-                  this.setState({login: !login})
+                  esto.setState({err: 'Datos erróneos. Escriba los datos nuevamente.'})// esto = this(Login); Recibe como argumento el "this" que sería Login fuera de la función.
+
 
                 }else{
-                  this.setState({err: 'No existe ningún usuario que coincida con esa contraseña. Escriba los datos nuevamente.'})
-                  this.setState({login: !login})
+
+                  esto.setState({err: 'No existe ningún usuario que coincida con esa contraseña. Escriba los datos nuevamente.'})// esto = this(Login); Recibe como argumento el "this" que sería Login fuera de la función.
+
                 }
               }
             
@@ -133,19 +140,11 @@ export default class Login extends Component {
         })
       
      }   
-     else {
-
-
-        console.log("NO entró al if")
-         
-       }
-
-  
+     
      
 
-   
-    
 
+    
 
 
 
@@ -179,7 +178,7 @@ export default class Login extends Component {
               <Button success onPress={this.register}>
                 <Text>RESGISTRO</Text>
               </Button>
-              <Button primary style={styles.boton}  onPress= {  () => {this.setState({login: !login})}  } >
+              <Button primary style={styles.boton}  onPress= {  () => {procesar(this.props, this)}  } >
 
                 <Text>ENTRAR</Text>
               </Button>
