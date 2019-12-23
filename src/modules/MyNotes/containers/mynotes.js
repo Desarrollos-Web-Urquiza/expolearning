@@ -3,11 +3,9 @@ import {StyleSheet} from 'react-native'
 import { Container, Header, Content, Text, FooterTab, Icon, Footer, Button } from 'native-base';
 import FooterTabs from "../../FooterTabs/containers/footerTabs.js"
 
-class Home extends Component {
-  
+class myNotes extends Component {
+
   render() {
-  
-  {console.log("Navegación Home: " + this.props.navigation)}
         
     {console.log(this.props.navigation.state.routeName)}
     return (
@@ -17,10 +15,10 @@ class Home extends Component {
         </Header>
         
         <Content padder contentContainerStyle={styles.content}>
-          <Text style={styles.textCenter} >BIENVENIDO AL HOME</Text>
+          <Text style={styles.textCenter} >BIENVENIDO A MYNOTES</Text>
         </Content>
         
-        <FooterTabs active="Home" row={this.props.navigation} />
+        <FooterTabs active="myNotes" row={this.props.navigation} />
 
       </Container>
     );
@@ -51,4 +49,4 @@ const styles= StyleSheet.create({
 
 })
 
-export default Home
+export default myNotes

@@ -4,75 +4,26 @@ import { StyleSheet, Text, View } from 'react-native';
 // import 'firebase/firestore';
 // import { config, settings } from "./firebase/FirebaseConfig";
 import Setup from "./src/boot/setup";
-
-/*
-firebase.initializeApp(config);
-
-const firestore = firebase.firestore();
-firestore.settings(settings);
-
-console.disableYellowBox = ['Remote Debugger'];*/
+import {Provider} from 'react-redux';
+// import {createStore} from 'redux';
+import store from './src/redux/store.js';
 
 
 export default class App extends React.Component {
 
-
-  // componentDidMount(){
-
-  //   // this._getRealTimeData();
-  //   this._getNormalData();
-
-
-  // }
-
   render() {
+    
     return (
       
+      <Provider store={store}>
+     
         <Setup />
      
+      </Provider>
+
     );
+
   }
-
-    // _getRealTimeData = () => {
-    	
-    //     const realTimeDatabaseRef = firestore.collection("users").doc("hola mundo");
-
-    //     realTimeDatabaseRef.onSnapshot( doc => {
-
-    //         console.log('--------------- Realtime Database ---------------');
-
-    //         if (doc.exists) console.log(doc.data());
-    //         else console.log('El documento no existe');
-
-    //         console.log('-----------------------------------------------');
-
-    //     })
-
-
-
-    // };
-
-    // _getNormalData = () => {
-
-    //     const normalDatabseRef = firestore.collection("users").doc("hola mundo");
-
-    //     normalDatabseRef.get().then( doc => {
-
-    //         console.log('--------------- Normal Database ---------------');
-
-    //         if (doc.exists) console.log(doc.data());
-    //          else console.log('El documento no existe');
-
-    //         console.log('-----------------------------------------------');
-
-
-    //     }).catch(function(error) {
-    //         console.log("Error getting document:", error);
-    //     });
-
-
-    // }
-
-}//class
+}
 
 

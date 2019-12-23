@@ -6,40 +6,48 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Login from './modules/Login/containers/login';
 import Register from './modules/Register/containers/register';
 import Home from './modules/Home/containers/home';
+import newNote from './modules/NewNote/containers/newnote';
+import myNotes from './modules/MyNotes/containers/mynotes';
+import FooterTabs from './modules/FooterTabs/containers/footerTabs';
 
 
 const LoginNavigator= createStackNavigator({
 
 
-  Login : {
+Login : {
 
     screen: Login,
 
-    
+},
 
-
-  },
-
-  Home : {
+Home : {
 
     screen: Home,
 
-    
-
-
-  },
+},
 
 Register : {
  
     screen: Register,
 
-    
+},
 
+newNote : {
+ 
+    screen: newNote,
 
-  }
+},
 
+myNotes : {
+ 
+    screen: myNotes,
 
+},
 
+FooterTabs : {
+ 
+    screen: FooterTabs,
+}    
 
 },{  headerMode:  'none'});
 
