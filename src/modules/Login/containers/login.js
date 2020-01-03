@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import {StyleSheet, TextInput} from 'react-native'
 import { Container, Header, Content, Card, CardItem, Text, Body, Button, Item ,Label, Input, Icon,  } from 'native-base';
-import * as firebase from 'firebase';
-import 'firebase/firestore';
-import { config, settings } from "./FirebaseConfig";
-/* ↑  ¡¡¿¿CÓMO VAS A IMPORTAR FIREBASE DESDE RAÍZ??!!*/
-firebase.initializeApp(config);
+import { firestore } from "../../../../firebase/FirebaseConfig";
 
-const firestore = firebase.firestore();
+// firebase.initializeApp(config);
 
+// const firestore = firebase.firestore();
 
-
-console.disableYellowBox = ['Remote Debugger'];
+// console.disableYellowBox = ['Remote Debugger'];
 
 class Login extends Component {
   
@@ -38,6 +34,7 @@ class Login extends Component {
     console.log(login)
     console.log(user)
     console.log(pass)
+    console.log("{ loginTEST:  8 }")
 
     function validate (props, esto)  {
 

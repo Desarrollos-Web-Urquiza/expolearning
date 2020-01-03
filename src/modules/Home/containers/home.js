@@ -7,9 +7,10 @@ class Home extends Component {
   
   render() {
   
-  {console.log("Navegación Home: " + this.props.navigation)}
+    {console.log("Navegación Home: " + this.props.navigation)}
         
     {console.log(this.props.navigation.state.routeName)}
+    
     return (
        <Container>
         

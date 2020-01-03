@@ -13,38 +13,28 @@ console.log(NUEVA)
 function reducidor( state , { type, payload } ) {
 
 
-	console.log(payload)
+	// console.log("PAYLOAD DEL REDUCIDOR!!!!" + payload)
+	if(state == undefined){
+
+		state ="hola mundo"
+
+	}
+
 	
-	if(payload !== undefined){
-		console.log("Redefinicion de localstorage")
-		localStorage.setItem("GLOBAL_STATE", payload)
-	}
-	
-	if(payload%2 === 0){
-
-		type = "NUEVA"
-
-	}
-	else{
-
-
-		type= " "
-	}
-
 
 	switch(type){
 
 		case NUEVA:
 			
 
-			return state = {estado: "Hola mundo", num: 1};
+			return state = payload
 
 
 		
  
 		default: 
 			
-			return state  = {estado: "Mundo hola", num: 0}; 
+			return state 
 
 	}
 }

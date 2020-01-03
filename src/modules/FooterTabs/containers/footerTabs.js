@@ -29,10 +29,10 @@ class FooterTabs extends Component {
     this.props.row.navigate('myNotes')
 
   } 
-  /* ↑  ESTO TE ROMPE TODO EL COMPONENTE*/
+  /* ↑  RECIBE NAVIGATION*/
   render() {
     
-    {console.log ("{ footerTabsTEST: 4 }")  }
+    {console.log ("{ footerTabsTEST: 5 }")  }
 
     {
      /*VALIDACIÓN PARA SABER DE DÓNDE SE LO ESTÁ LLAMANDO AL COMPONENTE FOOTERTABS*/
@@ -59,7 +59,7 @@ class FooterTabs extends Component {
 
       }
 
-      console.log("Esto viene del componente Home " + this.props.active) 
+      console.log("Esto viene del componente padre " + this.props.active) 
       console.log("Este es el estado de Home en el componente footerTabs " + this.state.Home) 
       console.log("Este es el estado de newNote en el componente footerTabs " + this.state.newNote) 
       console.log("Este es el estado de myNotes en el componente footerTabs " + this.state.myNotes) 
