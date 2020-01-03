@@ -12,207 +12,108 @@ class myNotes extends Component {
   constructor() {
     super();
     
-    this.state = {notesValues: 'No funcionó :-(', titles: [] , values: [] }
+    this.state = {notesValues: 'No funcionó :´-(', arrayNotes: []  }
    
   }
 
   render() {
         
     console.log(this.props.navigation.state.routeName)
-    console.log("{ mynotesTEST:  235}")
-
-
+    console.log("{ mynotesTEST:  237}")
       
-
-     
-     
-      // let notes = []
-      // let i = 0
+    const _getNormalData = () => {
       
-      // firestore.collection("notes").where("note.id_user", "==", 1)
-      // .get()
-      // .then(function(querySnapshot) {
-      //     querySnapshot.forEach(function(doc) {
-      //         // doc.data() is never undefined for query doc snapshots
-      //         // console.log(doc.id, " => ", doc.data());
-
-      //         notes[i] = {
-
-      //           id: doc.id,
-
-      //           note: doc.data().note.value,
-
-      //           title: doc.data().note.title
-
-      //         }
-
-      //         i++
-      //     });
-
-      // })
-      // .catch(function(error) {
-      //     console.log("Error getting documents: ", error);
-      // });
-           
-
-
-      
-      const _getNormalData = () => {
-        
-        return new Promise(function(resolve, reject) {
-
-          
-
+      return new Promise(function(resolve, reject) {
 
         let notes = new Array()
-              let i = 0
+        let i = 0
               
-              firestore.collection("notes").where("note.id_user", "==", 1)
-              .get()
-              .then(function(querySnapshot) {
-                  querySnapshot.forEach(function(doc) {
-                      // doc.data() is never undefined for query doc snapshots
-                      // console.log(doc.id, " => ", doc.data());
+        firestore.collection("notes").where("note.id_user", "==", 1)
+        .get()
+        .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+          // console.log(doc.id, " => ", doc.data());
 
-                      notes[i] = {
+            notes[i] = {
+              
+              id: doc.id,
 
-                        id: doc.id,
+              note: doc.data().note.value,
 
-                        note: doc.data().note.value,
+              title: doc.data().note.title
 
-                        title: doc.data().note.title
+            }
 
-                      }
+            i++
+          });
+      
+          return resolve(notes) 
+      
+        })
+        .catch(function(error) {
+        
+          console.log("Error getting documents: ", error);
+        
+        });
 
-                      i++
-                  });
-                  return resolve(notes) 
-              })
-              .catch(function(error) {
-                  console.log("Error getting documents: ", error);
-              });
+      });  
 
+    }
 
+    _getNormalData()
+    .then(param => {
+      
+      let parametros = JSON.stringify(param)
+      this.props.NUEVA(parametros)
 
+    })
 
+    if(this.props.reducidor == "hola mundo"){
+      
+      console.log("Estado undefined")
 
-        });  
+    } else{
 
+      let notas = JSON.parse(this.props.reducidor)
+
+      console.log("Reducidor me trae el estado: " + typeof(notas))
+      
+      this.state.notesValues = notas
+
+      console.log(this.state.notesValues.length)
+      
+      for (var i = this.state.notesValues.length - 1; i >= 0; i--) {
+
+        this.state.arrayNotes[i] =  this.state.notesValues[i]
+
+        console.log(this.state.arrayNotes[i])
+        
       }
+      
+      console.log("TITLES: " + this.state.arrayNotes[0].note)
 
-      _getNormalData()
-      .then(param => {
+    }
 
-          
-
-         
-          // console.log("El param es un : " + typeof(param))
-          let parametros = JSON.stringify(param)
-          this.props.NUEVA(parametros)
-          // console.log("Esto viene de la function despues del mapDispatchToProps" + param[0].note)
-         // console.log("Estado de notesValues " + this.state.notesValues) 
-
-         // console.log(this.state) 
-
-
-      })
-    
-        if(this.props.reducidor == "hola mundo"){
-          
-
-          console.log("Estado undefined")
-         
-
-         // console.log("Estado de notesValues (afuera de la function) " + this.state.notesValues) 
-        } else{
-
-
-
-          // console.log(this.props.reducidor)
-          let notas = JSON.parse(this.props.reducidor)
-
-
-
-
-          console.log("Reducidor me trae el estado: " + typeof(notas))
-           // console.log(notas[1].title)
-
-          this.state.notesValues = notas
-
-          console.log(this.state.notesValues.length)
-          
-
-          for (var i = this.state.notesValues.length - 1; i >= 0; i--) {
-
-
-
-
-            this.state.titles[i] =  this.state.notesValues[i]
-            // this.state.values[i] =  this.state.notesValues[i].note
-            console.log(this.state.titles[i])
-            // console.log(this.state.values[i])
-                
-          }
-          console.log("TITLES: " + this.state.titles[0].note)
-
-          
-
-
-        }
-
-
-
-
-         
-
-
-
-
-
-
-
-
-    
-
-
-
-
-    
-    
     return (
        <Container>
-        
-        <Header style={styles.header} >
-        </Header>
+
+        <Header style={styles.header} ></Header>
         
         <Content padder contentContainerStyle={styles.content}>
-          <Text style={styles.textCenter} >BIENVENIDO A MYNOTES</Text>
-
-
           
-
-
-           
+          <Text style={styles.textCenter} >BIENVENIDO A MYNOTES</Text>
 
          {
 
-            this.state.titles.map((notes) => {
+            this.state.arrayNotes.map((notes) => {
 
               return <Mynotesprint values={notes.note} titles={notes.title}    />
 
-           })
-            
+            })
 
          } 
-
-        
-
   
-
-
-
-          
-          
         </Content>
         
         <FooterTabs active="myNotes" row={this.props.navigation} />
@@ -245,36 +146,21 @@ const styles= StyleSheet.create({
   },
 
 })
+
 const mapStateToProps = (state) =>{
 
+  return{
 
+    reducidor: state.reducidor,
 
-          return{
-
-
-            reducidor: state.reducidor,
-
-
-          } 
-
-
-
-
-         }
-const mapDispatchToProps = {
-
-  
-
-    NUEVA,
-    
-
+  } 
 
 }
 
+const mapDispatchToProps = {
 
+  NUEVA,
 
-         
-
-
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(myNotes)

@@ -9,9 +9,6 @@ export default class Register extends Component {
      
     } 
 
-
-
-
   render() {
     return (
        <Container>
@@ -59,7 +56,6 @@ export default class Register extends Component {
 
 const styles= StyleSheet.create({
 
-
   textCenter: {
 
     textAlign: 'center',
@@ -83,8 +79,7 @@ const styles= StyleSheet.create({
   },
   arrow: {
 
-    marginRight: '85%',
-    
+    marginRight: '85%',  
 
   },
   body: {
@@ -97,10 +92,5 @@ const styles= StyleSheet.create({
     marginTop:  24
 
   },
-
-
-
-
-
 
 })

@@ -4,8 +4,6 @@ import { Container, Header, Content, Text, FooterTab, Icon, Footer, Button, Card
 import FooterTabs from "../../FooterTabs/containers/footerTabs.js"
 import { firestore } from "../../../../firebase/FirebaseConfig";
 
-
-
 class newNote extends Component {
  
   constructor() {
@@ -19,12 +17,11 @@ class newNote extends Component {
     
     console.log("{ newnoteTEST:  118 }")
     console.log(this.props.navigation.state.routeName)
-    // console.log(this.state.noteValue)
  
     function add (noteValue, title)  {
 
       console.log("Entró a la function add")
-      //Agregar datos en Firebase (sirve para modificar también)
+     
       if(noteValue == "" || title == "" ){
 
         alert("Los datos están icompletos")
@@ -40,7 +37,7 @@ class newNote extends Component {
               
               }
                  
-            })
+        })
         .then(function() {
             console.log("Document written");
             alert("¡Nota registrada!")
@@ -53,16 +50,12 @@ class newNote extends Component {
 
     }
 
-       
-
     return (
-       <Container>
+      <Container>
         
-        <Header style={styles.header} >
-        </Header>
+        <Header style={styles.header} ></Header>
         
         <Content padder contentContainerStyle={styles.content}>
-
 
         <Card>
             <CardItem header bordered>
@@ -97,7 +90,6 @@ class newNote extends Component {
 
           </Card>
 
-
         </Content>
         
         <FooterTabs active="newNote" row={this.props.navigation} />
@@ -108,7 +100,6 @@ class newNote extends Component {
 }
 
 const styles= StyleSheet.create({
-
 
   textCenter: {
 

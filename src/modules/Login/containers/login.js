@@ -3,12 +3,6 @@ import {StyleSheet, TextInput} from 'react-native'
 import { Container, Header, Content, Card, CardItem, Text, Body, Button, Item ,Label, Input, Icon,  } from 'native-base';
 import { firestore } from "../../../../firebase/FirebaseConfig";
 
-// firebase.initializeApp(config);
-
-// const firestore = firebase.firestore();
-
-// console.disableYellowBox = ['Remote Debugger'];
-
 class Login extends Component {
   
   constructor() {
