@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, TextInput} from 'react-native'
+import {StyleSheet, View, TextInput, Alert} from 'react-native'
 import { Container, Header, Content, Text, FooterTab, Icon, Footer, Button, Card, CardItem, Input } from 'native-base';
 import FooterTabs from "../../FooterTabs/containers/footerTabs.js"
 import { firestore } from "../../../../firebase/FirebaseConfig";
@@ -15,7 +15,7 @@ class newNote extends Component {
  
   render() {
     
-    console.log("{ newnoteTEST:  118 }")
+    console.log("{ newnoteTEST:  121 }")
     console.log(this.props.navigation.state.routeName)
  
     function add (noteValue, title)  {
@@ -24,7 +24,15 @@ class newNote extends Component {
      
       if(noteValue == "" || title == "" ){
 
-        alert("Los datos están icompletos")
+        Alert.alert(
+          'Error ',
+           "Los datos están icompletos"  ,
+
+          [
+            {text: 'OK', },
+          ],
+          {cancelable: false},
+        );
 
      } else{
 
@@ -40,7 +48,18 @@ class newNote extends Component {
         })
         .then(function() {
             console.log("Document written");
-            alert("¡Nota registrada!")
+           
+            Alert.alert(
+              '¡Nota registrada!',
+               'Puede verla en la sección "Mis notas" '  ,
+
+              [
+                {text: 'OK', },
+              ],
+              {cancelable: false},
+            );
+
+
         })
         .catch(function(error) {
             console.error("Error adding document: ", error);

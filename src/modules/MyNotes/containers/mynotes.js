@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet} from 'react-native'
+import {StyleSheet, ScrollView } from 'react-native'
 import { Container, Header, Content, Text, FooterTab, Icon, Footer, Button, Card, CardItem } from 'native-base';
 import FooterTabs from "../../FooterTabs/containers/footerTabs.js"
 import { firestore } from "../../../../firebase/FirebaseConfig";
@@ -19,7 +19,7 @@ class myNotes extends Component {
   render() {
         
     console.log(this.props.navigation.state.routeName)
-    console.log("{ mynotesTEST:  237}")
+    console.log("{ mynotesTEST:  251}")
       
     const _getNormalData = () => {
       
@@ -47,7 +47,8 @@ class myNotes extends Component {
 
             i++
           });
-      
+          
+      	  console.log("Consulta a BD  " + notes)
           return resolve(notes) 
       
         })
@@ -65,6 +66,7 @@ class myNotes extends Component {
     .then(param => {
       
       let parametros = JSON.stringify(param)
+      //Mandamos los resultados de la BD a Redux
       this.props.NUEVA(parametros)
 
     })
@@ -74,7 +76,7 @@ class myNotes extends Component {
       console.log("Estado undefined")
 
     } else{
-
+      //Traemos de Redux los resultados de la BD
       let notas = JSON.parse(this.props.reducidor)
 
       console.log("Reducidor me trae el estado: " + typeof(notas))
@@ -83,41 +85,57 @@ class myNotes extends Component {
 
       console.log(this.state.notesValues.length)
       
-      for (var i = this.state.notesValues.length - 1; i >= 0; i--) {
+      if(this.state.notesValues.length == 0 ) { 
+      	//Si no hay notas, damos este mensaje
+      	this.state.arrayNotes[0] = { title: "No tiene notas aún", note: "" }
+  	  
+  	  } else{
 
-        this.state.arrayNotes[i] =  this.state.notesValues[i]
+	    for (var i = this.state.notesValues.length - 1; i >= 0; i--) {
 
-        console.log(this.state.arrayNotes[i])
-        
-      }
-      
-      console.log("TITLES: " + this.state.arrayNotes[0].note)
+	       this.state.arrayNotes[i] =  this.state.notesValues[i]
+
+	       console.log(this.state.arrayNotes[i])
+	        
+	    }
+	      
+	    console.log("TITLES: " + this.state.arrayNotes[0].title)
+
+
+
+
+  	  }
 
     }
 
     return (
        <Container>
+       	
+       	<ScrollView>
 
-        <Header style={styles.header} ></Header>
-        
-        <Content padder contentContainerStyle={styles.content}>
-          
-          <Text style={styles.textCenter} >BIENVENIDO A MYNOTES</Text>
+	        <Header style={styles.header} ></Header>
+	        
+	        <Content padder contentContainerStyle={styles.content}>
+	          
+	          <Text style={styles.textCenter} >BIENVENIDO A MYNOTES</Text>
 
-         {
+	         {
 
-            this.state.arrayNotes.map((notes) => {
+	            this.state.arrayNotes.map((notes) => {
 
-              return <Mynotesprint values={notes.note} titles={notes.title}    />
+	              return <Mynotesprint values={notes.note} titles={notes.title}  id={notes.id}  />
 
-            })
+	            })
 
-         } 
-  
-        </Content>
-        
-        <FooterTabs active="myNotes" row={this.props.navigation} />
-
+	         } 
+	  
+	        </Content>
+	        
+      
+        </ScrollView>
+	    
+	    <FooterTabs active="myNotes" row={this.props.navigation} />
+      
       </Container>
     );
   }

@@ -28,7 +28,7 @@ class Login extends Component {
     console.log(login)
     console.log(user)
     console.log(pass)
-    console.log("{ loginTEST:  8 }")
+    console.log("{ loginTEST:  10 }")
 
     function validate (props, esto)  {
 
@@ -172,7 +172,7 @@ const styles= StyleSheet.create({
 
   boton: {
 
-    marginLeft: '70%'
+    marginLeft: '65%'
 
   },
   body: {
