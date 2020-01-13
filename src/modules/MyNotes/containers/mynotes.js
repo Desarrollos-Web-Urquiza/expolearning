@@ -12,14 +12,14 @@ class myNotes extends Component {
   constructor() {
     super();
     
-    this.state = {notesValues: 'No funcionó :´-(', arrayNotes: []  }
+    this.state = {notesValues: 'No funcionó :´-(', arrayNotes: [], nuevoArray: [] }
    
   }
 
   render() {
-        
+  
     console.log(this.props.navigation.state.routeName)
-    console.log("{ mynotesTEST:  251}")
+    console.log("{ mynotesTEST:  272")
       
     const _getNormalData = () => {
       
@@ -48,7 +48,7 @@ class myNotes extends Component {
             i++
           });
           
-      	  console.log("Consulta a BD  " + notes)
+          console.log("Consulta a BD  " + notes)
           return resolve(notes) 
       
         })
@@ -86,28 +86,26 @@ class myNotes extends Component {
       console.log(this.state.notesValues.length)
       
       if(this.state.notesValues.length == 0 ) { 
-      	//Si no hay notas, damos este mensaje
-      	this.state.arrayNotes[0] = { title: "No tiene notas aún", note: "" }
-  	  
-  	  } else{
+        //Si no hay notas, damos este mensaje
+        this.state.arrayNotes[0] = { title: "No tiene notas aún", note: "" }
+      
+      } else{
 
-	    for (var i = this.state.notesValues.length - 1; i >= 0; i--) {
+      for (var i = this.state.notesValues.length - 1; i >= 0; i--) {
 
-	       this.state.arrayNotes[i] =  this.state.notesValues[i]
+        
+         this.state.arrayNotes[i] =  this.state.notesValues[i]
 
-	       console.log(this.state.arrayNotes[i])
-	        
-	    }
-	      
-	    console.log("TITLES: " + this.state.arrayNotes[0].title)
+         console.log(this.state.arrayNotes[i])
+          
+      }
+        
+      console.log("TITLES: " + this.state.arrayNotes[0].title)
 
-
-
-
-  	  }
+      }
 
     }
-
+    
     return (
        <Container>
        	
@@ -119,19 +117,16 @@ class myNotes extends Component {
 	          
 	          <Text style={styles.textCenter} >BIENVENIDO A MYNOTES</Text>
 
-	         {
+             {
+                this.state.arrayNotes.map((notes) => {
+                
+                return <Mynotesprint values={notes.note} titles={notes.title}  id={notes.id} row={this.props.navigation} rows={this.props}   />
 
-	            this.state.arrayNotes.map((notes) => {
+              })
+	           } 
 
-	              return <Mynotesprint values={notes.note} titles={notes.title}  id={notes.id}  />
-
-	            })
-
-	         } 
-	  
-	        </Content>
+          </Content>
 	        
-      
         </ScrollView>
 	    
 	    <FooterTabs active="myNotes" row={this.props.navigation} />

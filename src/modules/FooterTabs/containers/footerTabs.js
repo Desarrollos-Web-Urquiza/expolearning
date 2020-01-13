@@ -7,31 +7,30 @@ class FooterTabs extends Component {
   /*FUNCTIONS DE REDIRECCIÓN*/
   newNote = () => {
 
-    this.props.row.navigate('newNote')
+    this.props.row.push('newNote')
 
   } 
   
    Home = () => {
 
-   this.props.row.navigate('Home')
+   this.props.row.push('Home')
 
   } 
 
   myNotes = () => {
 
-    this.props.row.navigate('myNotes')
+    this.props.row.push('myNotes')
 
   } 
   /* ↑  RECIBE NAVIGATION*/
   render() {
     
-    {console.log ("{ footerTabsTEST: 10 }")  }
+    {console.log ("{ footerTabsTEST: 15 }")  }
 
     {
      
       console.log("Navegación: " + this.props.navigation) 
       console.log("this.props.row: " + this.props.row) 
-
       console.log("VALIDACIÓN: " + this.props.active == "Home" ) 
 
     }
