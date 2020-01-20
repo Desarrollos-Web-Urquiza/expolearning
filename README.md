@@ -1,4 +1,4 @@
 expolearning
 =================
 
-A simple API to learn Expo and React Native
+A simple APP to learn Expo and React Native

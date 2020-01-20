@@ -78,7 +78,7 @@ class newNote extends Component {
 
         <Card>
             <CardItem header bordered>
-              <Text style={styles.textCenter} >ESCRIBA SU NOTA</Text>
+              <Text style={styles.textCenter} >ESCRIBA SU NUEVA NOTA</Text>
             </CardItem>
            
             <CardItem>

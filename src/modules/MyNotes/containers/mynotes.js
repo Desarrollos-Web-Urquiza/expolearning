@@ -14,14 +14,7 @@ class myNotes extends Component {
     
     this.state = {notesValues: 'No funcionó :´-(', arrayNotes: [], nuevoArray: [] }
    
-  }
-
-  render() {
-  
-    console.log(this.props.navigation.state.routeName)
-    console.log("{ mynotesTEST:  272")
-      
-    const _getNormalData = () => {
+    _getNormalData = () => {
       
       return new Promise(function(resolve, reject) {
 
@@ -61,7 +54,13 @@ class myNotes extends Component {
       });  
 
     }
+  }
 
+  render() {
+  
+    console.log(this.props.navigation.state.routeName)
+    console.log("{ mynotesTEST:  275}")
+    
     _getNormalData()
     .then(param => {
       
@@ -76,33 +75,33 @@ class myNotes extends Component {
       console.log("Estado undefined")
 
     } else{
-      //Traemos de Redux los resultados de la BD
-      let notas = JSON.parse(this.props.reducidor)
+        //Traemos de Redux los resultados de la BD
+        let notas = JSON.parse(this.props.reducidor)
 
-      console.log("Reducidor me trae el estado: " + typeof(notas))
-      
-      this.state.notesValues = notas
+        console.log("Reducidor me trae el estado: " + typeof(notas))
+        
+        this.state.notesValues = notas
 
-      console.log(this.state.notesValues.length)
-      
-      if(this.state.notesValues.length == 0 ) { 
-        //Si no hay notas, damos este mensaje
-        this.state.arrayNotes[0] = { title: "No tiene notas aún", note: "" }
+        console.log(this.state.notesValues.length)
+        
+        if(this.state.notesValues.length == 0 ) { 
+          //Si no hay notas, damos este mensaje
+          this.state.arrayNotes[0] = { title: "No tiene notas aún", note: "" }
       
       } else{
 
-      for (var i = this.state.notesValues.length - 1; i >= 0; i--) {
+          for (var i = this.state.notesValues.length - 1; i >= 0; i--) {
 
-        
-         this.state.arrayNotes[i] =  this.state.notesValues[i]
+            
+            this.state.arrayNotes[i] =  this.state.notesValues[i]
 
-         console.log(this.state.arrayNotes[i])
-          
-      }
-        
-      console.log("TITLES: " + this.state.arrayNotes[0].title)
+            console.log(this.state.arrayNotes[i])
+              
+          }
+            
+          console.log("TITLES: " + this.state.arrayNotes[0].title)
 
-      }
+        }
 
     }
     
@@ -119,11 +118,12 @@ class myNotes extends Component {
 
              {
                 this.state.arrayNotes.map((notes) => {
-                
+                  
                 return <Mynotesprint values={notes.note} titles={notes.title}  id={notes.id} row={this.props.navigation} rows={this.props}   />
 
-              })
-	           } 
+                })
+	          
+             } 
 
           </Content>
 	        
@@ -175,5 +175,14 @@ const mapDispatchToProps = {
   NUEVA,
 
 }
+
+/*
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+qui officia deserunt mollit anim id est laborum.
+
+*/
 
 export default connect(mapStateToProps, mapDispatchToProps)(myNotes)

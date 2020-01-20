@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -8,6 +9,7 @@ import Register from './modules/Register/containers/register';
 import Home from './modules/Home/containers/home';
 import newNote from './modules/NewNote/containers/newnote';
 import myNotes from './modules/MyNotes/containers/mynotes';
+import editNote from './modules/EditNote/containers/editnote';
 import FooterTabs from './modules/FooterTabs/containers/footerTabs';
 
 
@@ -41,6 +43,12 @@ newNote : {
 myNotes : {
  
     screen: myNotes,
+
+},
+
+editNote : {
+ 
+    screen: editNote,
 
 },
 

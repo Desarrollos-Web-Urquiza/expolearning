@@ -4,6 +4,7 @@ import { firestore } from "../../../../firebase/FirebaseConfig";
 import { Container, Header, Content, Text, FooterTab, Icon, Footer, Button, Card, CardItem } from 'native-base';
 import { connect } from 'react-redux';
 import  BACK  from '../../../redux/actions/back';
+import  EDIT  from '../../../redux/actions/edit';
 
 class Mynotesprint extends Component {
   constructor() {
@@ -15,7 +16,7 @@ class Mynotesprint extends Component {
 
   render() {
     
-    console.log("{ mynotesprintTEST:  97}")
+    console.log("{ mynotesprintTEST:  121}")
 
     let toShow = true
 
@@ -25,9 +26,11 @@ class Mynotesprint extends Component {
 
     }
 
-    console.log("Reducidor desde print " + this.props.back.yesDelete)
-    console.log("Reducidor es un " + typeof(this.props.back.yesDelete))
+    console.log("Reducer BACK desde print " + this.props.back.yesDelete)
+    console.log("Reducer BACK es un " + typeof(this.props.back.yesDelete))
     console.log("ID desde print " + this.props.id)
+    console.log("Redux EDIT " + this.props.EDIT)
+    console.log("Redux BACK " + this.props.BACK)
     
     if(this.props.back.yesDelete == undefined){
 
@@ -38,7 +41,7 @@ class Mynotesprint extends Component {
        this.props.back.yesDelete.map((notes) => {
                 
           console.log("Entró a .map")
-          console.log("Desde .map " + notes)
+          console.log("Desde .map value" + notes)
           console.log("Desde .map ID " + this.props.id)
           if (notes == this.props.id ) {
 
@@ -66,74 +69,85 @@ function bodyCardValidation (esto, toShow) {
 
   return (
 
-      <Card>
+    <Card>
 
-        <CardItem header bordered>
+      <CardItem header bordered>
 
-          <Text style={styles.textCenter} >{ esto.props.titles }</Text> 
+        <Text style={styles.textCenter} >{ esto.props.titles }</Text> 
 
-        </CardItem>
+      </CardItem>
 
-      { toShow  && footerCardValidation(esto) }
+    { toShow  && footerCardValidation(esto) }
 
-      </Card>  
+    </Card>  
 
   )
 
 }
 
- function footerCardValidation(esto) {
+function footerCardValidation(esto) {
 
   function deleteNote (esto)  {
   
     function deleteFirebase(esto){
 
-        // https://firebase.google.com/docs/firestore/manage-data/delete-data?hl=es
-        firestore.collection("notes").doc(esto.props.id).delete().then(function() {
-          console.log("Document successfully deleted!");
-          Alert.alert(
-          'Nota eliminada',
-           "¡La nota ha sido eliminada con éxito!"  ,
+      // https://firebase.google.com/docs/firestore/manage-data/delete-data?hl=es
+      firestore.collection("notes").doc(esto.props.id).delete().then(function() {
+        console.log("Document successfully deleted!");
+        Alert.alert(
+        'Nota eliminada',
+         "¡La nota ha sido eliminada con éxito!"  ,
 
-          [
-            {text: 'OK', },
-          ],
-          {cancelable: false},
-         );
-         esto.setState( { noDelete: false  } )
+        [
+        {text: 'OK', }, 
+        ],
+        {cancelable: false},
+       );
+       esto.setState( { noDelete: false  } )
 
-         if(esto.props.back == "No hay notas eliminadas"){
+       if(esto.props.back == "No hay notas eliminadas"){
 
-          let yesDelete = []
-          let reduxObject = { yesDelete }
-          reduxObject.yesDelete[0] = esto.props.id
-          esto.props.BACK(reduxObject)
+        let yesDelete = []
+        let reduxObject = { yesDelete }
+        reduxObject.yesDelete[0] = esto.props.id
+        esto.props.BACK(reduxObject)
 
-         } else{
+       } else{
 
-            esto.props.back.yesDelete.push(esto.props.id)
-            console.log("A Back se le hace pushe " +  esto.props.back.yesDelete )              
-            // esto.props.BACK(esto.props.back.yesDelete.push(esto.props.id))
+          esto.props.back.yesDelete.push(esto.props.id)
+          console.log("A Back se le hace push " +  esto.props.back.yesDelete )              
+          // esto.props.BACK(esto.props.back.yesDelete.push(esto.props.id))
 
-         }
+       }
 
-        }).catch(function(error) {
-            console.error("Error removing document: ", error);
-        });
-      }
-      Alert.alert(
-      '¿De verdad desea eliminar esta nota? ',
-       esto.props.titles  ,
+      }).catch(function(error) {
+          console.error("Error removing document: ", error);
+      });
+    }
+    Alert.alert(
+    '¿De verdad desea eliminar esta nota? ',
+     esto.props.titles  ,
 
-      [
-        {text: 'No', onPress: () => console.log('No quiere eliminar la nota ' + esto.props.id)},
-        
-        {text: 'Sí', onPress: () => deleteFirebase(esto) },
-      ],
-      {cancelable: false},
+    [
+      {text: 'No', onPress: () => console.log('No quiere eliminar la nota ' + esto.props.id)},
+      
+      {text: 'Sí', onPress: () => deleteFirebase(esto) },
+    ],
+    {cancelable: false},
     );
         
   }
+
+  function editNote(esto){
+    let objEdit = {}
+    objEdit.titles =  esto.props.titles
+    objEdit.values =  esto.props.values
+    objEdit.id =  esto.props.id
+
+    esto.props.EDIT(objEdit)
+    esto.props.row.push('editNote')
+
+  }  
         
   return(
    
@@ -143,9 +157,9 @@ function bodyCardValidation (esto, toShow) {
             
        <Text>
              
-       { 
+        { 
                   
-         esto.props.values
+          esto.props.values
         
         }
   
@@ -155,7 +169,13 @@ function bodyCardValidation (esto, toShow) {
 
       <CardItem footer bordered>
 
-        <Button danger style={styles.boton}  onPress= {  () => {deleteNote(esto)}  } >
+        <Button warning onPress= {  () => { editNote(esto)}  } >
+
+          <Text>EDITAR</Text>
+        
+        </Button>
+
+        <Button danger style={styles.botonDelete}  onPress= {  () => {deleteNote(esto)}  } >
 
           <Text>ELIMINAR</Text>{console.log("ID de values " + esto.props.id)}
         
@@ -177,9 +197,9 @@ const styles= StyleSheet.create({
     width: '100%'
 
   },
-  boton: {
+  botonDelete: {
 
-    marginLeft: '85%'
+    marginLeft: '68%'
 
   }
   
@@ -190,6 +210,7 @@ const mapStateToProps = (state) =>{
   return{
 
     back:  state.back,
+    edit: state.edit
   
   } 
 
@@ -198,6 +219,7 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = {
  
   BACK,
+  EDIT
 
 }
 
