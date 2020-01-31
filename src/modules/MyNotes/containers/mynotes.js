@@ -12,14 +12,21 @@ class myNotes extends Component {
   constructor() {
     super();
     
-    this.state = {notesValues: 'No funcionó :´-(', arrayNotes: [], nuevoArray: [] }
-   
+    this.state = { arrayNotas: [], nuevoArray: [] }  
+
+  }
+
+
+
+
+  componentWillMount() {
+
     _getNormalData = () => {
       
       return new Promise(function(resolve, reject) {
 
         let notes = new Array()
-        let i = 0
+        let i = 0       
               
         firestore.collection("notes").where("note.id_user", "==", 1)
         .get()
@@ -54,23 +61,22 @@ class myNotes extends Component {
       });  
 
     }
-  }
 
-  render() {
-  
-    console.log(this.props.navigation.state.routeName)
-    console.log("{ mynotesTEST:  275}")
-    
     _getNormalData()
-    .then(param => {
-      
-      let parametros = JSON.stringify(param)
-      //Mandamos los resultados de la BD a Redux
-      this.props.NUEVA(parametros)
+      .then(param => {
+        
+        let parametros = JSON.stringify(param)
+        //Mandamos los resultados de la BD a Redux
 
-    })
+        console.log("RESOLUCION DE PROMISE " + parametros)
+        this.props.NUEVA(parametros)
 
-    if(this.props.reducidor == "hola mundo"){
+      })
+
+     
+    console.log("REDUCIDOR " + this.props.reducidor)
+    
+     if(this.props.reducidor == "Estado undefined"){
       
       console.log("Estado undefined")
 
@@ -79,31 +85,80 @@ class myNotes extends Component {
         let notas = JSON.parse(this.props.reducidor)
 
         console.log("Reducidor me trae el estado: " + typeof(notas))
+        console.log("NOTAS !!! " + notas)
         
-        this.state.notesValues = notas
-
-        console.log(this.state.notesValues.length)
+        // this.state.notesValues = notas
+        let arrayNotes = []
+        console.log("Length " + notas.length)
         
-        if(this.state.notesValues.length == 0 ) { 
+        if(notas.length == 0 ) { 
           //Si no hay notas, damos este mensaje
-          this.state.arrayNotes[0] = { title: "No tiene notas aún", note: "" }
+          arrayNotes[0] = { title: "No tiene notas aún", note: "" }
       
       } else{
 
-          for (var i = this.state.notesValues.length - 1; i >= 0; i--) {
+          for (var i = notas.length - 1; i >= 0; i--) {
 
             
-            this.state.arrayNotes[i] =  this.state.notesValues[i]
+            arrayNotes[i] =  notas[i]
 
-            console.log(this.state.arrayNotes[i])
+            console.log(arrayNotes[i])
               
           }
             
-          console.log("TITLES: " + this.state.arrayNotes[0].title)
+          console.log("TITLES: " + arrayNotes[0].title)
 
         }
+        // this.setState({arrayNotas: arrayNotes })
+        let nuevoArrayNotes
+        nuevoArrayNotes = JSON.stringify(arrayNotes)
+      
+        // this.changeState()
+        this.setState({arrayNotas: arrayNotes})
 
+        
+        
     }
+
+
+
+
+  }
+
+  // getData = () => {
+  
+
+
+     
+
+
+
+
+
+
+  // };
+
+
+
+
+
+  
+
+
+  render() {
+  
+    console.log(this.props.navigation.state.routeName)
+    console.log("{ mynotesTEST:  362}")
+
+     
+
+   
+
+
+
+    
+    
+    
     
     return (
        <Container>
@@ -116,8 +171,16 @@ class myNotes extends Component {
 	          
 	          <Text style={styles.textCenter} >BIENVENIDO A MYNOTES</Text>
 
+             
+            {
+
+
+              console.log("ESTADO ARRAYNOTES " + this.state.arrayNotas)
+
+            }
+
              {
-                this.state.arrayNotes.map((notes) => {
+                this.state.arrayNotas.map((notes) => {
                   
                 return <Mynotesprint values={notes.note} titles={notes.title}  id={notes.id} row={this.props.navigation} rows={this.props}   />
 
@@ -177,6 +240,8 @@ const mapDispatchToProps = {
 }
 
 /*
+
+Lorem ipsum dolor sit amet
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.

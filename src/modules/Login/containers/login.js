@@ -28,7 +28,7 @@ class Login extends Component {
     console.log(login)
     console.log(user)
     console.log(pass)
-    console.log("{ loginTEST:  10 }")
+    console.log("{ loginTEST:  56  }")
 
     function validate (props, esto)  {
 
@@ -38,41 +38,71 @@ class Login extends Component {
         
         return new Promise(function(resolve, reject) {
 
-          let normalDatabseRef = firestore.collection("users").doc("hola mundo");
+          console.log("pass " + esto.state.pass)
+          console.log("user " + esto.state.user)
 
-          normalDatabseRef.get().then( doc => {
+      let client 
 
-            console.log('--------------- Normal Database ---------------');
+       firestore.collection("el_users").where("user.value", "==", esto.state.user).where("user.pass", "==", esto.state.pass)
+        .get()
+        .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+          // console.log(doc.id, " => ", doc.data());
 
-            if (doc.exists){ 
-          
-              console.log(doc.data().credentials); 
+            client = {
+              
+              id: doc.id,
 
-              //Resolvemos la promesa con los valores que vienen de la base de datos.
-              return resolve(doc.data().credentials) 
+              value: doc.data().user.value,
 
-            } else{
-            
-              console.log('El documento no existe');
+              pass: doc.data().user.pass
 
-              console.log('-----------------------------------------------');
-            
             }
 
-          }).catch(function(error) {
-              console.log("Error getting document:", error);
+            // i++
           });
+          if(client == undefined){
 
-        });  
+            client= { id:"", value: "", pass: ""}
 
-      }
+
+          }
+          console.log("Consulta a BD  " + client)
+          return resolve(client) 
+      
+        })
+        .catch(function(error) {
+        
+          console.log("Error getting documents: ", error);
+        
+        });
+
+      });  
+
+    }
+
 
       _getNormalData(props, esto)
       .then(param => {
 
-          console.log(param) 
-          
-          if(param.user == user && param.password == pass ){
+          console.log("PARAM" + param.value) 
+
+          // if(param == undefined){
+
+          //   param= { id:"No se encontró usuario", value: "No se encontró usuario", pass: "No se encontró usuario"}
+
+
+          // }
+          if(user == '' || pass == ''  ){
+
+              // esto = this(Login); Recibe como argumento el "this", que sería Login, que viene fuera de la función.
+            esto.setState({err: 'Los datos están incompletos.'})
+            console.log("No puede loguearse") 
+         } else{
+
+            
+             if(param.value == user && param.pass == pass ){
 
             console.log("Puede loguearse") 
             
@@ -80,14 +110,7 @@ class Login extends Component {
             /*  Con esta navigation lo mandamos al home */
             props.navigation.navigate('Home')
 
-          } else{
-
-            console.log("No puede loguearse") 
-            
-            if(user == '' || pass == ''  ){
-
-              // esto = this(Login); Recibe como argumento el "this", que sería Login, que viene fuera de la función.
-              esto.setState({err: 'Los datos están incompletos.'})
+          
 
             } else{
 

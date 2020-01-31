@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import  BACK  from '../../../redux/actions/back';
 import  EDIT  from '../../../redux/actions/edit';
 
+
+
 class Mynotesprint extends Component {
   constructor() {
     super();
@@ -16,7 +18,7 @@ class Mynotesprint extends Component {
 
   render() {
     
-    console.log("{ mynotesprintTEST:  121}")
+    console.log("{ mynotesprintTEST:  126}")
 
     let toShow = true
 
@@ -32,6 +34,7 @@ class Mynotesprint extends Component {
     console.log("Redux EDIT " + this.props.EDIT)
     console.log("Redux BACK " + this.props.BACK)
     
+    //Fabrica un array con todos los ID de notas eliminadas para saber luego que no se deben volver a imprimir en pantalla.
     if(this.props.back.yesDelete == undefined){
 
       console.log("Estado BACK es undefined")
@@ -45,7 +48,7 @@ class Mynotesprint extends Component {
           console.log("Desde .map ID " + this.props.id)
           if (notes == this.props.id ) {
 
-            this.state.noDelete = false
+            this.state.noDelete = false 
             console.log("ENCONTRÓ COINCIDENCIA")
           }
 
@@ -145,8 +148,11 @@ function footerCardValidation(esto) {
     objEdit.id =  esto.props.id
 
     esto.props.EDIT(objEdit)
-    esto.props.row.push('editNote')
+    
 
+     
+    esto.props.row.push('editNote')
+    
   }  
         
   return(
@@ -210,6 +216,7 @@ const mapStateToProps = (state) =>{
   return{
 
     back:  state.back,
+
     edit: state.edit
   
   } 
@@ -219,6 +226,7 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = {
  
   BACK,
+  
   EDIT
 
 }

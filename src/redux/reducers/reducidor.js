@@ -16,8 +16,8 @@ function reducidor( state , { type, payload } ) {
 	// console.log("PAYLOAD DEL REDUCIDOR!!!!" + payload)
 	if(state == undefined){
 
-		state ="hola mundo"
-
+		state ="Estado undefined"
+		
 	}
 
 	

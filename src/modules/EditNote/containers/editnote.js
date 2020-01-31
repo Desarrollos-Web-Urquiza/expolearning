@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { firestore } from "../../../../firebase/FirebaseConfig";
 import  EDIT  from '../../../redux/actions/edit';
 
+
 class editNote extends Component {
  
   constructor() {
@@ -17,7 +18,7 @@ class editNote extends Component {
 
   render() {
     
-    console.log("{ editNoteTEST:  53}")
+    console.log("{ editNoteTEST:  60}")
     console.log("EDIT " + this.props.edit.titles)
     console.log(this.props.navigation.state.routeName)
     console.log("Estado title " + this.state.title)
@@ -64,7 +65,11 @@ class editNote extends Component {
   		  console.log("Note updated");
   		});
 
-  	  esto.props.navigation.push('myNotes')
+      
+
+
+
+      esto.props.navigation.push('myNotes')
 
      }
 
@@ -172,7 +177,8 @@ const mapStateToProps = (state) =>{
 
   return{
 
-    edit: state.edit
+    edit: state.edit,
+
 
   } 
 
@@ -180,7 +186,8 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = {
 
-  EDIT
+  EDIT,
+  
 
 }
 
