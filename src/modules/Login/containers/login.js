@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {StyleSheet, TextInput} from 'react-native'
 import { Container, Header, Content, Card, CardItem, Text, Body, Button, Item ,Label, Input, Icon,  } from 'native-base';
-import { firestore } from "../../../../firebase/FirebaseConfig";
+import { firestore } from "../../../../firebase/FirebaseConfig";  
+import { connect } from 'react-redux';
+import  ID_USER  from '../../../redux/actions/id_user';
 
 class Login extends Component {
   
@@ -28,7 +30,7 @@ class Login extends Component {
     console.log(login)
     console.log(user)
     console.log(pass)
-    console.log("{ loginTEST:  56  }")
+    console.log("{ loginTEST:  67  }")
 
     function validate (props, esto)  {
 
@@ -41,76 +43,67 @@ class Login extends Component {
           console.log("pass " + esto.state.pass)
           console.log("user " + esto.state.user)
 
-      let client 
+          let client 
 
-       firestore.collection("el_users").where("user.value", "==", esto.state.user).where("user.pass", "==", esto.state.pass)
-        .get()
-        .then(function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-          // doc.data() is never undefined for query doc snapshots
-          // console.log(doc.id, " => ", doc.data());
+          firestore.collection("el_users").where("user.value", "==", esto.state.user).where("user.pass", "==", esto.state.pass)
+          .get()
+          .then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+          
+              client = {
+                
+                id: doc.id,
 
-            client = {
-              
-              id: doc.id,
+                value: doc.data().user.value,
 
-              value: doc.data().user.value,
+                pass: doc.data().user.pass
 
-              pass: doc.data().user.pass
+              }
+
+            });
+            if(client == undefined){
+
+              client= { id:"", value: "", pass: ""}
 
             }
-
-            // i++
-          });
-          if(client == undefined){
-
-            client= { id:"", value: "", pass: ""}
-
-
-          }
-          console.log("Consulta a BD  " + client)
-          return resolve(client) 
+            console.log("Consulta a BD  " + client)
+            return resolve(client) 
       
-        })
-        .catch(function(error) {
+          })
+          .catch(function(error) {
         
-          console.log("Error getting documents: ", error);
+            console.log("Error getting documents: ", error);
         
-        });
+          });
 
-      });  
+        });  
 
     }
-
 
       _getNormalData(props, esto)
       .then(param => {
 
           console.log("PARAM" + param.value) 
 
-          // if(param == undefined){
-
-          //   param= { id:"No se encontró usuario", value: "No se encontró usuario", pass: "No se encontró usuario"}
-
-
-          // }
+      
           if(user == '' || pass == ''  ){
 
-              // esto = this(Login); Recibe como argumento el "this", que sería Login, que viene fuera de la función.
+            // esto = this(Login); Recibe como argumento el "this", que sería Login, que viene fuera de la función.
             esto.setState({err: 'Los datos están incompletos.'})
             console.log("No puede loguearse") 
+        
          } else{
 
             
-             if(param.value == user && param.pass == pass ){
+            if(param.value == user && param.pass == pass ){
 
-            console.log("Puede loguearse") 
-            
-            //props = this.props(Login.props); Recibe como argumento el "this.props" de Login de afuera de la función.
-            /*  Con esta navigation lo mandamos al home */
-            props.navigation.navigate('Home')
-
-          
+              console.log("Puede loguearse " + param.id ) 
+              //Mandamos el ID a Redux
+              
+              props.ID_USER(param.id)
+              //props = this.props(Login.props); Recibe como argumento el "this.props" de Login de afuera de la función.
+              /*  Con esta navigation lo mandamos al home */
+              props.navigation.navigate('Home')
 
             } else{
 
@@ -217,4 +210,20 @@ const styles= StyleSheet.create({
 
 })
 
-export default Login ;
+const mapStateToProps = (state) =>{
+
+  return{
+
+    reducidor: state.id_user,
+
+  } 
+
+}
+
+const mapDispatchToProps = {
+
+  ID_USER,
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login) ;

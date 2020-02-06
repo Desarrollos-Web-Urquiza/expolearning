@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import  BACK  from '../../../redux/actions/back';
 import  EDIT  from '../../../redux/actions/edit';
 
-
-
 class Mynotesprint extends Component {
   constructor() {
     super();
@@ -46,10 +44,12 @@ class Mynotesprint extends Component {
           console.log("Entró a .map")
           console.log("Desde .map value" + notes)
           console.log("Desde .map ID " + this.props.id)
+          
           if (notes == this.props.id ) {
 
             this.state.noDelete = false 
             console.log("ENCONTRÓ COINCIDENCIA")
+          
           }
 
         })
@@ -143,14 +143,12 @@ function footerCardValidation(esto) {
 
   function editNote(esto){
     let objEdit = {}
+    
     objEdit.titles =  esto.props.titles
     objEdit.values =  esto.props.values
     objEdit.id =  esto.props.id
 
     esto.props.EDIT(objEdit)
-    
-
-     
     esto.props.row.push('editNote')
     
   }  

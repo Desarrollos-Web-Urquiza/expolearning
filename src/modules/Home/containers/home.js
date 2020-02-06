@@ -5,21 +5,20 @@ import FooterTabs from "../../FooterTabs/containers/footerTabs.js"
 import { firestore } from "../../../../firebase/FirebaseConfig";
 import { connect } from 'react-redux';
 import  NUEVA  from '../../../redux/actions/nueva';
+import  ID_USER  from '../../../redux/actions/id_user';
 
 class Home extends Component {
 
   componentWillMount() {
 
-
-
-    _getNormalData = () => {
+    _getNormalData = (esto) => {
       
       return new Promise(function(resolve, reject) {
 
         let notes = new Array()
         let i = 0
               
-        firestore.collection("notes").where("note.id_user", "==", 1)
+        firestore.collection("notes").where("note.id_user", "==", esto.props.id_user)
         .get()
         .then(function(querySnapshot) {
           querySnapshot.forEach(function(doc) {
@@ -52,7 +51,9 @@ class Home extends Component {
       });  
 
     }
-    _getNormalData()
+
+    let esto = this
+    _getNormalData(esto)
       .then(param => {
         
         let parametros = JSON.stringify(param)
@@ -60,11 +61,6 @@ class Home extends Component {
         this.props.NUEVA(parametros)
 
       })
-
-
-
-
-
 
   }
   
@@ -74,9 +70,8 @@ class Home extends Component {
 
       console.log("Navegación Home: " + this.props.navigation)
 
-      console.log("{ homeTEST:  5}")
-
-          
+      console.log("{ homeTEST:  9}")
+  
       console.log(this.props.navigation.state.routeName)
 
     }
@@ -99,7 +94,6 @@ class Home extends Component {
 }
 
 const styles= StyleSheet.create({
-
 
   textCenter: {
 
@@ -127,7 +121,7 @@ const mapStateToProps = (state) =>{
   return{
 
     reducidor: state.reducidor,
-
+    id_user: state.id_user
   } 
 
 }
@@ -135,6 +129,7 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = {
 
   NUEVA,
+  ID_USER
 
 }
 

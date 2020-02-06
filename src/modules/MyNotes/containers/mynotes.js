@@ -6,6 +6,7 @@ import { firestore } from "../../../../firebase/FirebaseConfig";
 import { connect } from 'react-redux';
 import  NUEVA  from '../../../redux/actions/nueva';
 import Mynotesprint   from "./mynotesprint.js";
+import  ID_USER  from '../../../redux/actions/id_user';
 
 class myNotes extends Component {
 
@@ -16,24 +17,21 @@ class myNotes extends Component {
 
   }
 
-
-
-
   componentWillMount() {
 
-    _getNormalData = () => {
+    _getNormalData = (esto) => {
       
       return new Promise(function(resolve, reject) {
 
+        console.log("ID DEL USUARIO DESDE LA PROMISE " + esto.props.id_user)  
+        
         let notes = new Array()
         let i = 0       
-              
-        firestore.collection("notes").where("note.id_user", "==", 1)
+       
+        firestore.collection("notes").where("note.id_user", "==", esto.props.id_user)
         .get()
         .then(function(querySnapshot) {
           querySnapshot.forEach(function(doc) {
-          // doc.data() is never undefined for query doc snapshots
-          // console.log(doc.id, " => ", doc.data());
 
             notes[i] = {
               
@@ -61,8 +59,10 @@ class myNotes extends Component {
       });  
 
     }
-
-    _getNormalData()
+    //Instanciar "this" para poder usarlo dentro de la promesa
+    let esto = this
+    
+    _getNormalData(esto)
       .then(param => {
         
         let parametros = JSON.stringify(param)
@@ -72,11 +72,10 @@ class myNotes extends Component {
         this.props.NUEVA(parametros)
 
       })
-
-     
+   
     console.log("REDUCIDOR " + this.props.reducidor)
     
-     if(this.props.reducidor == "Estado undefined"){
+    if(this.props.reducidor == "Estado undefined"){
       
       console.log("Estado undefined")
 
@@ -98,8 +97,7 @@ class myNotes extends Component {
       } else{
 
           for (var i = notas.length - 1; i >= 0; i--) {
-
-            
+         
             arrayNotes[i] =  notas[i]
 
             console.log(arrayNotes[i])
@@ -115,50 +113,15 @@ class myNotes extends Component {
       
         // this.changeState()
         this.setState({arrayNotas: arrayNotes})
-
-        
-        
+       
     }
-
-
-
-
+  
   }
-
-  // getData = () => {
-  
-
-
-     
-
-
-
-
-
-
-  // };
-
-
-
-
-
-  
-
 
   render() {
   
     console.log(this.props.navigation.state.routeName)
-    console.log("{ mynotesTEST:  362}")
-
-     
-
-   
-
-
-
-    
-    
-    
+    console.log("{ mynotesTEST:  392}")
     
     return (
        <Container>
@@ -170,23 +133,22 @@ class myNotes extends Component {
 	        <Content padder contentContainerStyle={styles.content}>
 	          
 	          <Text style={styles.textCenter} >BIENVENIDO A MYNOTES</Text>
-
-             
+   
             {
-
 
               console.log("ESTADO ARRAYNOTES " + this.state.arrayNotas)
 
             }
 
-             {
-                this.state.arrayNotas.map((notes) => {
+            {
+              
+              this.state.arrayNotas.map((notes) => {
                   
                 return <Mynotesprint values={notes.note} titles={notes.title}  id={notes.id} row={this.props.navigation} rows={this.props}   />
 
-                })
+              })
 	          
-             } 
+            } 
 
           </Content>
 	        
@@ -200,7 +162,6 @@ class myNotes extends Component {
 }
 
 const styles= StyleSheet.create({
-
 
   textCenter: {
 
@@ -228,6 +189,7 @@ const mapStateToProps = (state) =>{
   return{
 
     reducidor: state.reducidor,
+    id_user: state.id_user
 
   } 
 
@@ -236,7 +198,7 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = {
 
   NUEVA,
-
+  ID_USER
 }
 
 /*
