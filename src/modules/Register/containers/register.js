@@ -19,7 +19,8 @@ export default class Register extends Component {
     } 
 
   render() {
-     console.log("{ registerTEST:  11}")
+    console.log("{ registerTEST:  11}")
+    
     console.log(this.state.name)
     console.log(this.state.pass)
     console.log(this.state.passX2)

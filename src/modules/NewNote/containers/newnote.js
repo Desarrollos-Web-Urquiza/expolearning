@@ -18,11 +18,11 @@ class newNote extends Component {
  
   render() {
     
-    console.log("{ newnoteTEST:  135 }")
+    console.log("{ newnoteTEST:  138 }")
     console.log(this.props.navigation.state.routeName)
     console.log("El ID del usuario logueado es: " + this.props.id_user)
  
-    function add (noteValue, title, id_user)  {
+    function add (noteValue, title, id_user, esto)  {
 
       console.log("Entró a la function add")
      
@@ -63,7 +63,7 @@ class newNote extends Component {
               ],
               {cancelable: false},
             );
-
+            esto.props.navigation.push('Home')
         })
         .catch(function(error) {
             console.error("Error adding document: ", error);
@@ -111,7 +111,7 @@ class newNote extends Component {
            
             <CardItem footer bordered>
               
-              <Button primary style={styles.boton}  onPress= {  () => {add(this.state.noteValue, this.state.title, this.props.id_user ) }  } >
+              <Button primary style={styles.boton}  onPress= {  () => {add(this.state.noteValue, this.state.title, this.props.id_user , this) }  } >
 
                 <Text>REGISTRAR NOTA</Text>
              

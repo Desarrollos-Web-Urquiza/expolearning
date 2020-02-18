@@ -17,7 +17,7 @@ class myNotes extends Component {
 
   }
 
-  componentWillMount() {
+  componentDidMount() {
 
     _getNormalData = (esto) => {
       
@@ -68,7 +68,7 @@ class myNotes extends Component {
         let parametros = JSON.stringify(param)
         //Mandamos los resultados de la BD a Redux
 
-        console.log("RESOLUCION DE PROMISE " + parametros)
+        console.log("RESOLUCIÓN DE PROMISE " + parametros)
         this.props.NUEVA(parametros)
 
       })
@@ -121,7 +121,7 @@ class myNotes extends Component {
   render() {
   
     console.log(this.props.navigation.state.routeName)
-    console.log("{ mynotesTEST:  392}")
+    console.log("{ mynotesTEST:  394}")
     
     return (
        <Container>
@@ -144,7 +144,7 @@ class myNotes extends Component {
               
               this.state.arrayNotas.map((notes) => {
                   
-                return <Mynotesprint values={notes.note} titles={notes.title}  id={notes.id} row={this.props.navigation} rows={this.props}   />
+                return <Mynotesprint values={notes.note} titles={notes.title}  id={notes.id} row={this.props.navigation} rows={this.props} id_user={this.props.id_user} />
 
               })
 	          

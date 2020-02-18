@@ -16,7 +16,8 @@ class Mynotesprint extends Component {
 
   render() {
     
-    console.log("{ mynotesprintTEST:  126}")
+    console.log("{ mynotesprintTEST:  137}")
+    
 
     let toShow = true
 
@@ -35,7 +36,7 @@ class Mynotesprint extends Component {
     //Fabrica un array con todos los ID de notas eliminadas para saber luego que no se deben volver a imprimir en pantalla.
     if(this.props.back.yesDelete == undefined){
 
-      console.log("Estado BACK es undefined")
+      console.log("Estado BACK es undefined " + this.props.back.yesDelete  )
     
     } else {
 
@@ -128,8 +129,8 @@ function footerCardValidation(esto) {
       });
     }
     Alert.alert(
-    '¿De verdad desea eliminar esta nota? ',
-     esto.props.titles  ,
+    '¿De verdad desea eliminar esta nota? \n Recuerde que esta acción no se puede deshacer. ',
+     `¿Eliminar "${esto.props.titles}" ? ` ,
 
     [
       {text: 'No', onPress: () => console.log('No quiere eliminar la nota ' + esto.props.id)},
@@ -147,6 +148,8 @@ function footerCardValidation(esto) {
     objEdit.titles =  esto.props.titles
     objEdit.values =  esto.props.values
     objEdit.id =  esto.props.id
+    objEdit.id_user =  esto.props.id_user
+
 
     esto.props.EDIT(objEdit)
     esto.props.row.push('editNote')

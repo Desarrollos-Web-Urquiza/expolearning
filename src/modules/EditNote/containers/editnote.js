@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, TextInput, Alert} from 'react-native'
-import { Container, Header, Content, Text, FooterTab, Icon, Footer, Button, Card, CardItem, Input } from 'native-base';
+import { Container, Header, Content, Text, FooterTab, Icon, Footer, Button, Card, CardItem, Left, Input } from 'native-base';
 import FooterTabs from "../../FooterTabs/containers/footerTabs.js"
 import { connect } from 'react-redux';
 import { firestore } from "../../../../firebase/FirebaseConfig";
@@ -16,18 +16,26 @@ class editNote extends Component {
    
   }
 
+   backTomyNote = () => {
+
+      this.props.navigation.push('myNotes')
+     
+    } 
+
   render() {
     
-    console.log("{ editNoteTEST:  60}")
+    console.log("{ editNoteTEST:  74}")
+
     console.log("EDIT " + this.props.edit.titles)
     console.log(this.props.navigation.state.routeName)
     console.log("Estado title " + this.state.title)
     
-    function edit (esto, oldTitle, oldNoteValue, id, newTitle, newNoteValue )  {
+    function edit (esto, oldTitle, oldNoteValue, id, newTitle, newNoteValue, id_user )  {
 
       console.log("Entró a la function edit")
       console.log("Desde edit oldTitle " + oldTitle)
       console.log("Desde edit oldNoteValue " + oldNoteValue)
+      console.log("Desde edit id_user " + id_user)
       
       if(newNoteValue == "" && newTitle == "" ){
 
@@ -57,7 +65,7 @@ class editNote extends Component {
 
   		firestore.collection("notes").doc(id).update({
   		  note: {
-  		  	id_user: 1,
+  		  	id_user: id_user,
   		    title: newTitle,
   		    value: newNoteValue
   		  }
@@ -69,22 +77,34 @@ class editNote extends Component {
 
 
 
-      esto.props.navigation.push('myNotes')
+      esto.props.navigation.push('Home')
 
      }
 
     }
 
-    function backTomyNote(esto) {
+    // function backTomyNote(esto) {
 
-      esto.props.navigation.push('myNotes')
+    //   esto.props.navigation.push('myNotes')
 
-    }
+    // }
+
+    // backTomyNote = () => {
+
+    //   this.props.navigation.navigate('myNotes')
+     
+    // } 
 
     return (
       <Container>
         
-        <Header style={styles.header} ></Header>
+        <Header style={styles.header} >
+          <Left style={styles.arrow}>
+              <Button transparent>
+                  <Icon name='arrow-back' onPress={ this.backTomyNote } />
+               </Button>
+          </Left>
+        </Header>
         
         <Content padder contentContainerStyle={styles.content}>
 
@@ -111,13 +131,7 @@ class editNote extends Component {
               </CardItem>
               <CardItem footer bordered>
                 
-                <Button success  onPress= {  () => { backTomyNote(this) }  } >
-
-                  <Text>ATRÁS</Text>
-               
-                </Button>
-                
-                <Button primary style={styles.boton}  onPress= {  () => {edit(this, this.props.edit.titles, this.props.edit.values, this.props.edit.id, this.state.title, this.state.noteValue  ) }  } >
+                <Button primary style={styles.boton}  onPress= {  () => {edit(this, this.props.edit.titles, this.props.edit.values, this.props.edit.id, this.state.title, this.state.noteValue, this.props.edit.id_user  ) }  } >
 
                   <Text>EDITAR NOTA</Text>
                
@@ -160,6 +174,11 @@ const styles= StyleSheet.create({
     borderColor: "#5A63F7",
     borderWidth: 1,
     padding: 1
+  },
+  arrow: {
+
+    marginRight: '85%',  
+
   },
   textArea: {
     height: 300
