@@ -25,6 +25,20 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+
+    "android":{
+
+      "package": "com.DesarrollosWebUrquiza.DWU",
+      "versionCode": 1,
+      "permissions":[],
+      "icon": ""
+
     }
+
+
+
+
+
   }
 }
