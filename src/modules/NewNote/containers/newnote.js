@@ -18,7 +18,7 @@ class newNote extends Component {
  
   render() {
     
-    console.log("{ newnoteTEST:  138 }")
+    console.log("{ newnoteTEST:  148 }")
     console.log(this.props.navigation.state.routeName)
     console.log("El ID del usuario logueado es: " + this.props.id_user)
  
@@ -111,9 +111,9 @@ class newNote extends Component {
            
             <CardItem footer bordered>
               
-              <Button primary style={styles.boton}  onPress= {  () => {add(this.state.noteValue, this.state.title, this.props.id_user , this) }  } >
+              <Button large primary style={styles.boton}  onPress= {  () => {add(this.state.noteValue, this.state.title, this.props.id_user , this) }  } >
 
-                <Text>REGISTRAR NOTA</Text>
+                <Text style={styles.textButton}>REGISTRAR</Text>
              
               </Button>
 
@@ -159,6 +159,10 @@ const styles= StyleSheet.create({
     height: 300
      
   },
+  textButton: {
+    fontSize: 15,
+     
+  },
   boton: {
 
     marginLeft: '75%'
@@ -177,6 +181,7 @@ const mapStateToProps = (state) =>{
   } 
 
 }
+
 
 const mapDispatchToProps = {
 

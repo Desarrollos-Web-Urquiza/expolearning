@@ -24,7 +24,7 @@ class editNote extends Component {
 
   render() {
     
-    console.log("{ editNoteTEST:  74}")
+    console.log("{ editNoteTEST:  75}")
 
     console.log("EDIT " + this.props.edit.titles)
     console.log(this.props.navigation.state.routeName)

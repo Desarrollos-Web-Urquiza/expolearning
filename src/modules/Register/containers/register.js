@@ -19,7 +19,7 @@ export default class Register extends Component {
     } 
 
   render() {
-    console.log("{ registerTEST:  11}")
+    console.log("{ registerTEST:  16}")
     
     console.log(this.state.name)
     console.log(this.state.pass)
@@ -132,8 +132,8 @@ export default class Register extends Component {
               </Body>
             </CardItem>
             <CardItem footer bordered>
-              <Button primary style={styles.boton} onPress= {  () => { add(this.state) }  }>
-                <Text>REGISTRO</Text>
+              <Button large primary style={styles.boton} onPress= {  () => { add(this.state) }  }>
+                <Text style={styles.text}>REGISTRO</Text>
               </Button>
             </CardItem>
           </Card>
@@ -164,7 +164,7 @@ const styles= StyleSheet.create({
   boton: {
 
     marginLeft: '85%',
-    
+     
 
   },
   arrow: {
@@ -175,6 +175,11 @@ const styles= StyleSheet.create({
   body: {
 
     paddingVertical:  30
+
+  }, 
+  text: {
+
+    fontSize: 14,   
 
   }, 
   header: {

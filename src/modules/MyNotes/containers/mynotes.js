@@ -42,8 +42,8 @@ class myNotes extends Component {
               title: doc.data().note.title
 
             }
-
-            i++
+      i++
+              
           });
           
           console.log("Consulta a BD  " + notes)
@@ -65,6 +65,7 @@ class myNotes extends Component {
     _getNormalData(esto)
       .then(param => {
         
+        // Redux lleva string nada más, por eso hay que convertir
         let parametros = JSON.stringify(param)
         //Mandamos los resultados de la BD a Redux
 

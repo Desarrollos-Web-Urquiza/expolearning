@@ -13,4 +13,4 @@ You need to install the "Expo" APP to run the "expolearning" APP. Expolearning o
 
 Then you can register in the APP to log in and start creating notes.
 
-You can also download the project and install it on your Android 5 or higher with this link: https://expo.io/artifacts/33d8f6b8-3fda-415b-94c9-bd463a07625a
+You can also download the project and install it on your Android 5 or higher with this link: https://drive.google.com/file/d/1jRyagCF5wYWwDA-tdtWNo2TBW2qUqaGY/view
