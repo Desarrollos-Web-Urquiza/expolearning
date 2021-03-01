@@ -23,5 +23,4 @@ function edit( state="No se editan notas" , { type, payload } ) {
 	}
 }
 
-
 export default edit  

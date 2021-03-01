@@ -23,5 +23,4 @@ function back( state="No hay notas eliminadas" , { type, payload } ) {
 	}
 }
 
-
 export default back  

@@ -42,38 +42,39 @@ class newNote extends Component {
 
         firestore.collection("notes").add({
               
-              note:{ 
+          note:{ 
 
-                id_user: id_user,
-                title: title,
-                value: noteValue
-              
-              }
+            id_user: id_user,
+            title: title,
+            value: noteValue
+          
+          }
                  
         })
         .then(function() {
-            console.log("Document written");
-           
-            Alert.alert(
-              '¡Nota registrada!',
-               'Puede verla en la sección "Mis notas" '  ,
+          console.log("Document written");
+          
+          Alert.alert(
+            '¡Nota registrada!',
+              'Puede verla en la sección "Mis notas" '  ,
 
-              [
-                {text: 'OK', },
-              ],
-              {cancelable: false},
-            );
-            esto.props.navigation.push('Home')
+            [
+              {text: 'OK', },
+            ],
+            {cancelable: false},
+          );
+          esto.props.navigation.push('Home')
         })
         .catch(function(error) {
-            console.error("Error adding document: ", error);
+          console.error("Error adding document: ", error);
         });
 
-     }
+      }
 
     }
 
     return (
+      
       <Container>
         
         <Header style={styles.header} ></Header>
@@ -96,16 +97,16 @@ class newNote extends Component {
            
             <CardItem style={styles.textAreaContainer} >
                 
-                <TextInput
-                  style={styles.textArea}
-                  underlineColorAndroid="transparent"
-                  placeholder="Lo que deseo recordar es..."
-                  placeholderTextColor="grey"
-                  numberOfLines={10}
-                  multiline={true}
-                  onChangeText = {   (noteValue) => this.setState({noteValue})       } 
+              <TextInput
+                style={styles.textArea}
+                underlineColorAndroid="transparent"
+                placeholder="Lo que deseo recordar es..."
+                placeholderTextColor="grey"
+                numberOfLines={10}
+                multiline={true}
+                onChangeText = {   (noteValue) => this.setState({noteValue})       } 
 
-                />
+              />
 
             </CardItem>
            
@@ -138,6 +139,7 @@ const styles= StyleSheet.create({
     width: '100%'
 
   },
+
   content: {
 
     flex: 1,
@@ -150,23 +152,25 @@ const styles= StyleSheet.create({
     marginTop:  24
 
   },
+
    textAreaContainer: {
     borderColor: "#5A63F7",
     borderWidth: 1,
     padding: 1
   },
+
   textArea: {
     height: 300
      
   },
+
   textButton: {
     fontSize: 15,
      
   },
+
   boton: {
-
     marginLeft: '75%'
-
   }
 
 })
@@ -191,77 +195,3 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(newNote)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- // var name = { name: "Note " +  user_notes.amount }
-
- // //Agregar datos en Firebase (sirve para modificar también)
- //        db.collection("notes").doc(id_user).set({//Si no existe la colección o el documento, te lo crea
- //            notes:{
-              
- //              name.name: `${text}`
-              
-            
- //            }
-              
- //        })
- //    .then(function() {
- //        console.log("Document written");
-        
-
- //    })
- //    .catch(function(error) {
- //        console.error("Error adding document: ", error);
-      
- //    });
-
-
-
-
- //        //Agregar datos en Firebase (sirve para modificar también)
- //        db.collection("notes").doc(id_user).set({//Si no existe la colección o el documento, te lo crea
- //            user_notes:{
-              
- //              amount: 0,
-              
-            
- //            }
-             
- //        })
- //    .then(function() {
- //        console.log("Document written");
-        
-
- //    })
- //    .catch(function(error) {
- //        console.error("Error adding document: ", error);
-      
- //    });
-
-
-
-
- //  }

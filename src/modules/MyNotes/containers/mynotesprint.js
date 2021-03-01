@@ -81,7 +81,7 @@ function bodyCardValidation (esto, toShow) {
 
       </CardItem>
 
-    { toShow  && footerCardValidation(esto) }
+      { toShow  && footerCardValidation(esto) }
 
     </Card>  
 
@@ -143,6 +143,7 @@ function footerCardValidation(esto) {
   }
 
   function editNote(esto){
+    
     let objEdit = {}
     
     objEdit.titles =  esto.props.titles
@@ -204,6 +205,7 @@ const styles= StyleSheet.create({
     width: '100%'
 
   },
+
   botonDelete: {
 
     marginLeft: '68%'
@@ -217,7 +219,6 @@ const mapStateToProps = (state) =>{
   return{
 
     back:  state.back,
-
     edit: state.edit
   
   } 
@@ -227,7 +228,6 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps = {
  
   BACK,
-  
   EDIT
 
 }

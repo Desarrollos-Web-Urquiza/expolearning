@@ -15,9 +15,7 @@ class Login extends Component {
   }
 
   register = () => {
-
     this.props.navigation.navigate('Register')
-
   } 
 
   render() {
@@ -62,18 +60,13 @@ class Login extends Component {
 
             });
             if(client == undefined){
-
               client= { id:"", value: "", pass: ""}
-
             }
             console.log("Consulta a BD  " + client)
             return resolve(client) 
-      
           })
           .catch(function(error) {
-        
             console.log("Error getting documents: ", error);
-        
           });
 
         });  
@@ -82,10 +75,8 @@ class Login extends Component {
 
       _getNormalData(props, esto)
       .then(param => {
-
           console.log("PARAM" + param.value) 
 
-      
           if(user == '' || pass == ''  ){
 
             // esto = this(Login); Recibe como argumento el "this", que sería Login, que viene fuera de la función.
@@ -174,38 +165,30 @@ class Login extends Component {
 const styles= StyleSheet.create({
 
   textCenter: {
-
     textAlign: 'center',
     width: '100%'
-
   },
-  content: {
 
+  content: {
     flex: 1,
     justifyContent: 'center'
-
   },
-
+  
   boton: {
-
     marginLeft: '65%'
-
   },
+
   body: {
-
     paddingVertical:  30
-
   }, 
+
   header: {
-
     marginTop:  24
-
   },
-  err: {
 
+  err: {
     marginTop:  24,
     color: 'red'
-
   },
 
 })

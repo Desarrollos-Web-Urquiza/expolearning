@@ -96,41 +96,31 @@ class Home extends Component {
 const styles= StyleSheet.create({
 
   textCenter: {
-
     textAlign: 'center',
     width: '100%'
-
   },
+  
   content: {
-
     flex: 1,
     justifyContent: 'center'
-
   },
 
   header: {
-
     marginTop:  24
-
   },
 
 })
 
 const mapStateToProps = (state) =>{
-
   return{
-
     reducidor: state.reducidor,
     id_user: state.id_user
   } 
-
 }
 
 const mapDispatchToProps = {
-
   NUEVA,
   ID_USER
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

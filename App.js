@@ -8,7 +8,6 @@ import {Provider} from 'react-redux';
 // import {createStore} from 'redux';
 import store from './src/redux/store.js';
 
-
 export default class App extends React.Component {
 
   render() {
@@ -24,6 +23,7 @@ export default class App extends React.Component {
     );
 
   }
+  
 }
 
 

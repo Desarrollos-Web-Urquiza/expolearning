@@ -13,12 +13,11 @@ export default class Register extends Component {
   }
 
   arrow = () => {
-
-      this.props.navigation.navigate('Login')
-     
-    } 
+    this.props.navigation.navigate('Login')
+  } 
 
   render() {
+    
     console.log("{ registerTEST:  16}")
     
     console.log(this.state.name)
@@ -32,7 +31,7 @@ export default class Register extends Component {
       console.log(estoProps.pass)
       console.log(estoProps.passX2)
 
-       if(estoProps.name == "" || estoProps.pass == "" || estoProps.passX2 == "" ){
+      if(estoProps.name == "" || estoProps.pass == "" || estoProps.passX2 == "" ){
 
         Alert.alert(
           'Error ',
@@ -44,22 +43,18 @@ export default class Register extends Component {
           {cancelable: false},
         );
 
-     } else{
-
+      } else{
 
         if(estoProps.pass ==  estoProps.passX2  ){
 
-        firestore.collection("el_users").add({
-              user:{ 
-
-                pass: estoProps.pass,
-                value: estoProps.name
-                
-              
-              }
-                 
-        })
-        .then(function() {
+          firestore.collection("el_users").add({
+            user:{ 
+              pass: estoProps.pass,
+              value: estoProps.name
+            }   
+          })
+          .then(function() {
+            
             console.log("Document written");
            
             Alert.alert(
@@ -71,43 +66,36 @@ export default class Register extends Component {
               ],
               {cancelable: false},
             );
-
-
-        })
-        .catch(function(error) {
+          })
+          .catch(function(error) {
             console.error("Error adding document: ", error);
-        });
+          });
 
     
-      } else{
+        } else{
 
-        Alert.alert(
-          'Error ',
-           "Las contraseñas no coinciden"  ,
+          Alert.alert(
+            'Error ',
+            "Las contraseñas no coinciden"  ,
 
-          [
-            {text: 'OK', },
-          ],
-          {cancelable: false},
-        );
+            [
+              {text: 'OK', },
+            ],
+            {cancelable: false},
+          );
 
+        }
       }
-
      }
-
-
-
-     }
-
-
+     
     return (
-       <Container>
+      <Container>
         <Header style={styles.header} >
-           <Left style={styles.arrow}>
-            <Button transparent>
-                <Icon name='arrow-back' onPress={this.arrow} />
-             </Button>
-            </Left>
+          <Left style={styles.arrow}>
+          <Button transparent>
+            <Icon name='arrow-back' onPress={this.arrow} />
+          </Button>
+          </Left>
         </Header>
         <Content padder contentContainerStyle={styles.content}>
           <Card>
@@ -118,7 +106,6 @@ export default class Register extends Component {
               <Body  style={styles.body}>
                 <Item inlineLabel>
                   <Icon active name='person'></Icon>
-                  
                   <Input placeholder='Nombre de usuario' onChangeText = {   (name) => this.setState({name})       } />
                 </Item>
                <Item inlineLabel last>
@@ -137,8 +124,7 @@ export default class Register extends Component {
               </Button>
             </CardItem>
           </Card>
-        </Content>
-        
+        </Content> 
       </Container>
     );
   }
@@ -147,45 +133,33 @@ export default class Register extends Component {
 const styles= StyleSheet.create({
 
   textCenter: {
-
     textAlign: 'center',
     width: '100%'
-
-
   },
-  content: {
 
+  content: {
     flex: 1,
     justifyContent: 'center'
-
-
   },
 
   boton: {
-
     marginLeft: '85%',
-     
-
   },
+
   arrow: {
-
     marginRight: '85%',  
-
   },
+
   body: {
-
     paddingVertical:  30
-
   }, 
+
   text: {
-
     fontSize: 14,   
-
   }, 
+
   header: {
-
     marginTop:  24
-
   },
 
 })

@@ -42,7 +42,7 @@ class myNotes extends Component {
               title: doc.data().note.title
 
             }
-      i++
+          i++
               
           });
           
@@ -170,6 +170,7 @@ const styles= StyleSheet.create({
     width: '100%'
 
   },
+  
   content: {
 
     flex: 1,

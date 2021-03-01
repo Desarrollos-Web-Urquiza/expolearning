@@ -6,21 +6,15 @@ class FooterTabs extends Component {
 
   /*FUNCTIONS DE REDIRECCIÓN*/
   newNote = () => {
-
     this.props.row.push('newNote')
-
   } 
   
    Home = () => {
-
    this.props.row.push('Home')
-
   } 
 
   myNotes = () => {
-
     this.props.row.push('myNotes')
-
   } 
   /* ↑  RECIBE NAVIGATION*/
   render() {
@@ -28,36 +22,35 @@ class FooterTabs extends Component {
     {console.log ("{ footerTabsTEST: 15 }")  }
 
     {
-     
       console.log("Navegación: " + this.props.navigation) 
       console.log("this.props.row: " + this.props.row) 
       console.log("VALIDACIÓN: " + this.props.active == "Home" ) 
-
     }
 
     return (
          
-        <Footer>
-         
-          <FooterTab>
-         
-            <Button vertical active={ this.props.active == "Home" } onPress={this.Home}  >
-              <Icon  active={ this.props.active == "Home" } name="home" />
-              <Text>Home</Text>
-            </Button>
-         
-            <Button vertical active={ this.props.active == "newNote" } onPress={this.newNote} >
-              <Icon active={ this.props.active == "newNote" } name="brush" />
-              <Text>Nueva nota</Text>
-            </Button>
-         
-            <Button vertical active={ this.props.active == "myNotes"} onPress={this.myNotes} >
-              <Icon active={ this.props.active == "myNotes" }  name="navigate" />
-              <Text>Mis notas</Text>
-            </Button>           
-         
-          </FooterTab>
-        </Footer>
+      <Footer>
+        
+        <FooterTab>
+        
+          <Button vertical active={ this.props.active == "Home" } onPress={this.Home}  >
+            <Icon  active={ this.props.active == "Home" } name="home" />
+            <Text>Home</Text>
+          </Button>
+        
+          <Button vertical active={ this.props.active == "newNote" } onPress={this.newNote} >
+            <Icon active={ this.props.active == "newNote" } name="brush" />
+            <Text>Nueva nota</Text>
+          </Button>
+        
+          <Button vertical active={ this.props.active == "myNotes"} onPress={this.myNotes} >
+            <Icon active={ this.props.active == "myNotes" }  name="navigate" />
+            <Text>Mis notas</Text>
+          </Button>           
+        
+        </FooterTab>
+        
+      </Footer>
 
     );
   }
